@@ -1,0 +1,88 @@
+<mvc:View
+xmlns:core="sap.ui.core"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+controllerName="br.com.idxtecMovimentaContaBancaria.controller.GravarMovimentoContaBancaria"
+xmlns:html="http://www.w3.org/1999/xhtml"
+xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page showNavButton="true"
+				navButtonPress="onVoltar"> 
+				<content>
+					<VBox class="sapUiSmallMargin">	
+						<f:SimpleForm id="SimpleFormChange480_Trial"
+						editable="true"
+						layout="ResponsiveGridLayout"
+						title="{view>/titulo}"
+						labelSpanXL="4"
+						labelSpanL="4"
+						labelSpanM="4"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="0"
+						emptySpanL="0"
+						emptySpanM="0"
+						emptySpanS="0"
+						columnsXL="3"
+						columnsL="2"
+						columnsM="2"
+						singleContainerFullSize="false">
+							<f:content>
+								<Label text="Documento" labelFor="documento"/>
+								<Input id="documento" value="{model>/Documento}"/>
+						
+								<Label text="Conta bancária" labelFor="contabancaria" required="true"/>
+								<Input selectedKey="{model>/ContaBancaria}"
+									textFormatMode="KeyValue"
+									showSuggestion="true"
+									showValueHelp="true"
+									valueHelpRequest="handleSearchConta"
+									suggestionItems="{path: '/ContaBancarias'}"
+									id="contabancaria">
+									<suggestionItems>
+										<core:ListItem key="{Id}" text="{Descricao}"/>
+									</suggestionItems>
+								</Input>
+								
+								<Label text="Data" labelFor="data" required="true"/>
+								<DatePicker id="data" dateValue="{model>/Data}" displayFormat="dd.MM.yyyy" placeholder="dd.mm.aaaa"/>
+								
+								<Label text="Débito" labelFor="debito"/>
+								<Input id="debito" value="{path: 'model>/Debito', 
+										type: 'sap.ui.model.odata.type.Single',
+			                            formatOptions:{
+			                                decimals: 2,
+			                                decimalSeparator: ','
+			                            }}"/>
+								
+								<Label text="Crédito" labelFor="credito"/>
+								<Input id="credito" value="{path: 'model>/Credito', 
+										type: 'sap.ui.model.odata.type.Single',
+			                            formatOptions:{
+			                                decimals: 2,
+			                                decimalSeparator: ','
+			                            }}"/>
+								
+								<Label text="Cheque" labelFor="cheque"/>
+								<Input id="cheque" value="{model>/Cheque}"/>
+								
+								<Label text="Histórico" labelFor="historico"/>
+								<Input id="historico" value="{model>/Historico}"/>
+								
+								<Label text="Conciliado" labelFor="conciliado"/>
+								<CheckBox id="conciliado" selected="{model>/Conciliado}"/>
+							</f:content>
+						</f:SimpleForm>
+					</VBox>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button id="salvar" text="Salvar" press="onSalvar" class="sapUiSmallMarginEnd"/>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

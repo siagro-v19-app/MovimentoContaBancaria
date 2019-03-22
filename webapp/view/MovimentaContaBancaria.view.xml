@@ -1,0 +1,103 @@
+<mvc:View
+controllerName="br.com.idxtecMovimentaContaBancaria.controller.MovimentaContaBancaria" 
+xmlns:html="http://www.w3.org/1999/xhtml"
+xmlns:mvc="sap.ui.core.mvc"
+displayBlock="true"
+xmlns="sap.m"
+xmlns:t="sap.ui.table">
+	<App id="app">
+		<pages>
+			<Page>
+				<content>
+					<t:Table id="tableMovimento"
+						rows="{path: '/MovimentoContaBancarias',
+							parameters: {
+								expand: 'ContaBancariaDetails'
+							}
+						}">
+						<t:toolbar>
+							<Toolbar>
+								<Title text="Movimento de conta bancária"/>
+							</Toolbar>
+						</t:toolbar>
+						<t:columns>
+							<t:Column filterProperty="Documento" sortProperty="Documento">
+								<Label text="Documento"/>
+								<t:template>
+									<Text text="{Documento}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="ContaBancariaDetails/Descricao" sortProperty="ContaBancariaDetails/Descricao">
+								<Label text="Conta bancária"/>
+								<t:template>
+									<Text text="{ContaBancariaDetails/Descricao}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Data" sortProperty="Data">
+								<Label text="Data"/>
+								<t:template>
+									<Text text="{
+										path : 'Data',
+										type : 'sap.ui.model.type.Date',
+										formatOptions: {
+											style : 'short'
+										}
+									}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Debito" sortProperty="Debito">
+								<Label text="Débito"/>
+								<t:template>
+									<Text text="{path: 'Debito',
+										type: 'sap.ui.model.odata.type.Single',
+			                            formatOptions:{
+			                                decimals: 2,
+			                                decimalSeparator: ','
+			                            }}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Credito" sortProperty="Credito">
+								<Label text="Crédito"/>
+								<t:template>
+									<Text text="{path: 'Credito',
+										type: 'sap.ui.model.odata.type.Single',
+			                            	formatOptions:{
+			                                	decimals: 2,
+			                            		decimalSeparator: ','
+			                            	}}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Cheque" sortProperty="Cheque">
+								<Label text="Cheque"/>
+								<t:template>
+									<Text text="{Cheque}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Historico" sortProperty="Historico">
+								<Label text="Histórico"/>
+								<t:template>
+									<Text text="{Historico}"/>
+								</t:template>
+							</t:Column>
+							<t:Column filterProperty="Conciliado" sortProperty="Conciliado">
+								<Label text="Conciliado"/>
+								<t:template>
+									<Checkbox selected="{Conciliado}" editable="false"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+				</content>
+				<footer>
+					<Toolbar>
+						<Button id="refresh" icon="sap-icon://refresh" press="onRefresh"/>
+						<ToolbarSpacer/>
+						<Button id="incluir" text="Incluir Novo" press="onIncluir"/> 
+						<Button id="editar" text="Editar" press="onEditar"/> 
+						<Button id="remover" text="Remover" press="onRemover"/> 
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
