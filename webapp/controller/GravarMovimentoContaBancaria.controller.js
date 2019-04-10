@@ -158,6 +158,10 @@ sap.ui.define([
 		
 		onVoltar: function(){
 			this._goBack();
+		},
+		
+		getModel : function(sModel) {
+			return this.getOwnerComponent().getModel(sModel);	
 		}
 	});
 });
