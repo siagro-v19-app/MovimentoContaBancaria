@@ -1,16 +1,16 @@
 <mvc:View
-xmlns:core="sap.ui.core"
-xmlns:mvc="sap.ui.core.mvc"
-xmlns="sap.m"
-controllerName="br.com.idxtecMovimentaContaBancaria.controller.GravarMovimentoContaBancaria"
-xmlns:html="http://www.w3.org/1999/xhtml"
-xmlns:f="sap.ui.layout.form">
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="br.com.idxtecMovimentaContaBancaria.controller.GravarMovimentoContaBancaria"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.ui.layout.form">
 	<App>
 		<pages>
 			<Page showHeader="false"> 
 				<content>
 					<VBox class="sapUiSmallMargin">	
-						<Panel headerText="Movimento Conta Bancária">
+						<Panel headerText="{view>/titulo}">
 							<f:SimpleForm id="formMovimento"
 								editable="true"
 								layout="ResponsiveGridLayout"
@@ -28,7 +28,6 @@ xmlns:f="sap.ui.layout.form">
 								columnsM="2"
 								singleContainerFullSize="false">
 								<f:content>
-									<core:Title text="{view>/titulo}"/>
 									<Label text="Documento" labelFor="documento"/>
 									<Input id="documento" value="{model>/Documento}"/>
 							
@@ -85,8 +84,8 @@ xmlns:f="sap.ui.layout.form">
 				<footer>
 					<Toolbar>
 						<ToolbarSpacer/>
-						<Button icon="sap-icon://save" id="salvar" text="Salvar" press="onSalvar"/>
-						<Button icon="sap-icon://reset" id="voltar" text="Cancelar" press="onVoltar"/>
+						<Button text="Salvar" press="onSalvar" type="Accept"/>
+   						<Button text="Fechar" press="onVoltar" type="Reject"/>
 					</Toolbar>
 				</footer>
 			</Page>

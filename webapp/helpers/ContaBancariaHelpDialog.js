@@ -40,6 +40,8 @@ sap.ui.define([
 				oInput.setSelectedKey(sId);
 			}
 			evt.getSource().getBinding("items").filter([]);
+			
+			this._valueHelpDialog = undefined;
 		}
 	};
 });

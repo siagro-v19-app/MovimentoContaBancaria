@@ -1,8 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageBox",
-	"sap/ui/model/json/JSONModel"
-], function(Controller, MessageBox, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	"br/com/idxtecMovimentaContaBancaria/services/Session"
+], function(Controller, MessageBox, JSONModel, Filter, FilterOperator, Session) {
 	"use strict";
 
 	return Controller.extend("br.com.idxtecMovimentaContaBancaria.controller.MovimentaContaBancaria", {
@@ -11,6 +14,29 @@ sap.ui.define([
 			
 			this.getOwnerComponent().setModel(oParamModel, "parametros");
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+			
+			this.getModel().attachMetadataLoaded(function(){
+				var oFilter = new Filter("Empresa", FilterOperator.EQ, Session.get("EMPRESA_ID"));
+				var oView = this.getView();
+				var oTable = oView.byId("tableMovimento");
+				var oColumn = oView.byId("columnConta");
+				
+				oTable.sort(oColumn);
+				oView.byId("tableMovimento").getBinding("rows").filter(oFilter, "Application");
+			});
+		},
+		
+		filtraMov: function(oEvent){
+			var sQuery = oEvent.getParameter("query");
+			var oFilter1 = new Filter("Empresa", FilterOperator.EQ, Session.get("EMPRESA_ID"));
+			var oFilter2 = new Filter("ContaBancariaDetails/Descricao", FilterOperator.Contains, sQuery);
+			
+			var aFilters = [
+				oFilter1,
+				oFilter2
+			];
+
+			this.getView().byId("tableMovimento").getBinding("rows").filter(aFilters, "Application");
 		},
 
 		onRefresh: function(e){
@@ -78,6 +104,10 @@ sap.ui.define([
 					oTable.clearSelection();
 				}
 			});
+		},
+		
+		getModel: function(){
+			return this.getOwnerComponent().getModel(); 
 		}
 	});
 });
