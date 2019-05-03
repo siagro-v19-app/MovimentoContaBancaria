@@ -10,15 +10,6 @@
 			<Page showHeader="false" class="sapUiContentPadding" enableScrolling="false">
 				<content>
 					<t:Table id="tableMovimento"
-						rows="{
-							path: '/MovimentoContaBancarias',
-							sorter: {
-								path: 'ContaBancariaDetails/Descricao'
-							},
-							parameters: {
-								expand: 'ContaBancariaDetails'
-							}
-						}"
 						class="sapUiSizeCondensed"
 						selectionMode="Single"
 						selectionBehavior="Row"
@@ -32,7 +23,7 @@
 							<Toolbar>
 								<Title text="Lista de Movimentos"/>
 								<ToolbarSpacer/>
-								<SearchField placeholder="Pesquisar movimento..." width="30%" search="filtraMov"/>
+								<SearchField placeholder="Pesquisar conta bancária..." width="30%" search="filtraMov"/>
 							</Toolbar>
 						</t:toolbar>
 						<t:columns>
